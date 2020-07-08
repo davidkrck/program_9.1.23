@@ -6,12 +6,24 @@ typedef struct{
     float *elem;
 }MAT;
 
-ELEM(mat, i, j)
-
 
 MAT *mat_create_with_type(unsigned int rows, unsigned int cols)
 {
+    MAT *mat = (MAT*)(sizeof(MAT));
 
+    if (mat == NULL)
+        return NULL;
+
+    mat->rows = rows;
+    mat->cols = cols;
+
+    mat->elem = (float *)(sizeof(float)*rows*cols);
+
+    if (mat->elem = NULL)
+    {
+
+        return NULL;
+    }
 }
 
 //MAT *mat_create_by_file(char *filename){
@@ -22,9 +34,7 @@ char mat_save(MAT *mat, char *filename){
 
 }
 
-void mat_destroy(MAT *mat){
 
-}
 
 void mat_unit(MAT *mat){
 
@@ -42,6 +52,10 @@ void mat_random(MAT *mat){
 }
 
 void mat_print(MAT *mat){
+
+}
+
+void mat_destroy(MAT *mat){
 
 }
 
