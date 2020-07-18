@@ -11,7 +11,7 @@ typedef struct{
 
 MAT *mat_create_with_type(unsigned int rows, unsigned int cols)
 {
-    MAT *mat = (MAT*)(sizeof(MAT));
+    MAT *mat = (MAT*)malloc(sizeof(MAT));
 
     if (mat == NULL)
         return NULL;
@@ -19,7 +19,7 @@ MAT *mat_create_with_type(unsigned int rows, unsigned int cols)
     mat->rows = rows;
     mat->cols = cols;
 
-    mat->elem = (float *)(sizeof(float)*rows*cols);
+    mat->elem = (float *)malloc(sizeof(float)*rows*cols);
 
     if (mat->elem = NULL)
     {
@@ -85,11 +85,20 @@ void mat_destroy(MAT *mat){
 
 char mat_invert(MAT *mat, MAT *inv){
 
+    int i, j, m;
+    
+    if(mat->cols!=mat->rows){
+        printf ("Matica musi byt štvorcová");
+    }
+    else{
+
+    }
+
 }
 
 
 int main(){
-    MAT *matica;
+    MAT *matica, *invert_matica;
 
     unsigned int rows, cols;
     
@@ -101,5 +110,9 @@ int main(){
     mat_random(matica);
 
     mat_print(matica);
+
+    invert_matica = mat_create_with_type(rows, cols);
+    
+    //mat_invert(matica, invert_matica);
 
 }
