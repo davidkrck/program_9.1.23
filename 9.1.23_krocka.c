@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#define ELEM(mat, i, j) (mat->elem[(mat->cols)*i+j])
 
 typedef struct{
     unsigned int rows;
@@ -40,7 +42,7 @@ void mat_unit(MAT *mat){
     int i, j;
 
     for(i = 0; i < mat->rows; i++){
-        for(j = 0, j < mat->cols; j++){
+        for(j = 0; j < mat->cols; j++){
             if (i==j)
                 ELEM(mat, i, j) = 1.0;
             else
@@ -56,7 +58,7 @@ void mat_random(MAT *mat){
     int i, j;
 
     for(i = 0; i < mat->rows; i++){
-        for(j = 0, j < mat->cols; j++){
+        for(j = 0; j < mat->cols; j++){
 
             ELEM(mat, i, j) = ((float)rand()/(float)(RAND_MAX));
         }
@@ -67,13 +69,13 @@ void mat_print(MAT *mat){
     int i, j;
 
     for(i = 0; i < mat->rows; i++){
-        for(j = 0, j < mat->cols; j++){
+        for(j = 0; j < mat->cols; j++){
 
-            print("%f",ELEM(mat, i , j ));
+            printf("%f",ELEM(mat, i , j));
         }
-        print("\n");
+        printf("\n");
     }
-    print("\n");
+    printf("\n");
 }
 
 void mat_destroy(MAT *mat){
@@ -87,11 +89,10 @@ char mat_invert(MAT *mat, MAT *inv){
 
 
 int main(){
-
-    unsigned int rows, cols;
-
     MAT *matica;
 
+    unsigned int rows, cols;
+    
     printf("Zadaj rozmery 1. matice: \n");
     scanf("%d %d", &rows, &cols);
 
