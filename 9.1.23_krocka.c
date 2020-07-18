@@ -32,14 +32,24 @@ MAT *mat_create_with_type(unsigned int rows, unsigned int cols)
 
 //}
 
-char mat_save(MAT *mat, char *filename){
+//char mat_save(MAT *mat, char *filename){
 
-}
-
-
+//}
 
 void mat_unit(MAT *mat){
+    int i, j;
 
+    for(i = 0; i < mat->rows; i++){
+        for(j = 0, j < mat->cols; j++){
+            if (i==j)
+                ELEM(mat, i, j) = 1.0;
+            else
+            {
+                ELEM(mat, i , j) = 0.0;
+            }
+            
+        }
+    }
 }
 
 void mat_random(MAT *mat){
