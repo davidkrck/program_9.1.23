@@ -24,6 +24,8 @@ MAT *mat_create_with_type(unsigned int rows, unsigned int cols)
 
         return NULL;
     }
+
+    return mat;
 }
 
 //MAT *mat_create_by_file(char *filename){
@@ -43,8 +45,8 @@ void mat_unit(MAT *mat){
 void mat_random(MAT *mat){
     int i, j;
 
-    for(i = 0; i < mat -> rows; i++){
-        for(j = 0, j < mat -> cols; j++){
+    for(i = 0; i < mat->rows; i++){
+        for(j = 0, j < mat->cols; j++){
 
             ELEM(mat, i, j) = ((float)rand()/(float)(RAND_MAX));
         }
@@ -52,11 +54,21 @@ void mat_random(MAT *mat){
 }
 
 void mat_print(MAT *mat){
+    int i, j;
 
+    for(i = 0; i < mat->rows; i++){
+        for(j = 0, j < mat->cols; j++){
+
+            print("%f",ELEM(mat, i , j ));
+        }
+        print("\n");
+    }
+    print("\n");
 }
 
 void mat_destroy(MAT *mat){
-
+    free(mat->elem);
+    free(mat);
 }
 
 char mat_invert(MAT *mat, MAT *inv){
