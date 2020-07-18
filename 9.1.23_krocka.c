@@ -84,3 +84,21 @@ void mat_destroy(MAT *mat){
 char mat_invert(MAT *mat, MAT *inv){
 
 }
+
+
+int main(){
+
+    unsigned int rows, cols;
+
+    MAT *matica;
+
+    printf("Zadaj rozmery 1. matice: \n");
+    scanf("%d %d", &rows, &cols);
+
+    matica = mat_create_with_type(rows, cols);
+
+    mat_random(matica);
+
+    mat_print(matica);
+
+}
