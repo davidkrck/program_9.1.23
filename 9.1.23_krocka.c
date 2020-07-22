@@ -73,9 +73,26 @@ MAT *mat_create_by_file(char *filename){
     return matica;
 }
 
-//char mat_save(MAT *mat, char *filename){
+char mat_save(MAT *mat, char *filename){
 
-//}
+    int subor = open(filename, O_CREAT | O_WRONLY | O_BINARY, S_IWUSR);
+
+    if ( subor < 0){
+        printf("subor je prazdny");
+    }
+
+    //zápis prvého riadku
+    write(subor, "M1", sizeof(char)*2);
+
+    //zápis rozmerov matice
+    write(subor, &mat->rows, sizeof(unsigned int));
+    write(subor, &mat->cols, sizeof(unsigned int));
+
+    //zápis prvkov matice - float
+    write(subor, mat->elem, sizeof(float)*(mat->rows)*(mat->cols));
+
+    close(subor);
+}
 
 void mat_unit(MAT *mat){
     int i, j;
@@ -137,10 +154,11 @@ char mat_invert(MAT *mat, MAT *inv){
 
 
 int main(){
-    MAT *matica, *invert_matica;
+    MAT *matica, *invert_matica, *matica2;
 
     unsigned int rows, cols;
-    
+    char filename[] = {0};
+
     printf("Zadaj rozmery 1. matice: \n");
     scanf("%d %d", &rows, &cols);
 
@@ -149,6 +167,14 @@ int main(){
     mat_random(matica);
 
     mat_print(matica);
+
+    printf("Zadaj názov súboru: \n");
+    scanf("%s", filename);
+    mat_save(matica, filename);
+
+    matica2 = mat_create_by_file(filename);
+
+    mat_print(matica2);
 
     invert_matica = mat_create_with_type(rows, cols);
 
