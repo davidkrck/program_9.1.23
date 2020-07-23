@@ -32,7 +32,7 @@ MAT *mat_create_with_type(unsigned int rows, unsigned int cols)
 
     if (mat->elem = NULL)
     {
-
+        free(mat)
         return NULL;
     }
 
