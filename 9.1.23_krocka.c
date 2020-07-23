@@ -49,7 +49,7 @@ MAT *mat_create_by_file(char *filename){
 
 
     if ( subor < 0){
-        printf("subor je prazdny");
+        return NULL;
     }
 
     // čitanie prvych dvoch bajtov
@@ -57,7 +57,7 @@ MAT *mat_create_by_file(char *filename){
     read(subor, &typ_suboru[1], sizeof(char));
 
     if (typ_suboru[0] != 'M' || typ_suboru[1] != '1'){
-        printf("subor neobsahuje hustu maticu");
+       return NULL;
     }
 
     //čítanie rozmerov matice
@@ -78,7 +78,7 @@ char mat_save(MAT *mat, char *filename){
     int subor = open(filename, O_CREAT | O_WRONLY | O_BINARY, S_IWUSR);
 
     if ( subor < 0){
-        printf("subor je prazdny");
+        return NULL;
     }
 
     //zápis prvého riadku
